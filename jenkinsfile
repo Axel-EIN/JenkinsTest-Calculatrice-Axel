@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    tools{
+        nodejs "NodeJS22"
+    }
+    stages {
+        stage('Git Checkout') {
+            steps {
+               git branch: 'main', url: 'https://github.com/Axel-EIN/calculatrice-jenkins'
+            }
+        }
+        stage( 'Install Dependencies' ) {
+            steps {
+                bat 'npm install'
+            }
+        }
+        stage( 'Run Tests') {
+            steps {
+                bat 'npm test'
+            }
+        }
+    }
+}
